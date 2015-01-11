@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Abe </title>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-touch-fullscreen" content="yes">
+    <link href="/Content/icons/appicon@2x.png" sizes="114x114" rel="apple-touch-icon">
+    <script type="text/javascript" src="cordova.js"></script>
+    <!-- iOS 6 Old iPhone -->
+    <link href="/Content/screenshots/Default.png" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image">
+    <!-- iPhone -->
+    <link href="/Content/screenshots/Default.png" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image">
+    <!-- iPhone (Retina) -->
+    <link href="/Content/screenshots/Default-667h@2x.png" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+    <!-- iPhone 5 -->
+    <link href="/Content/screenshots/Default-568h@2x.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+    <!-- iPhone 6 (portrait) -->
+    <link href="/Content/screenshots/Default-667h@2x.png" media="(device-width: 375px) and (device-height: 667px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+    <!-- iPhone 6 Plus (portrait) -->
+    <link href="/Content/screenshots/Default-Portrait-736h@3x.png" media="(device-width: 414px) and (device-height: 736px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+
+    <script type="text/javascript" src="bitcoinjs.min.js"></script>
+    <script type="text/javascript" src="branching.js"></script>
+    <script type="text/javascript" src="multiSigAddressLib.js"></script>
+    <script type="text/javascript" src="jquery.qrcode.js"></script>
+    <script type="text/javascript" src="qrcode.js"></script>
+
+
+    <body>
+        
+    <div data-role="page" id="pagehome">
+        <div data-role="header" data-theme="a">
+            <!-- <a href="index.html" data-icon="grid" rel="external">Menu</a> -->
+            <h1>ABE - MultiSig ATM</h1>
+        </div>
+        <div data-role="content" style="width:100%; height:100%; padding:0;">
+
+            This is your MultiSig key <span id="multiSigAddress"></span>
+            <div id="qrCodeMultiSig" style="margin: 20px;"></div><BR>
+            <center><button onclick="CallBitcoinWallet()">Click to Fund</button></center>
+        </div>
+
+
+        <footer data-role="footer" data-position="fixed" data-theme="a" id="app-nav">
+            <div data-role="navbar" data-iconpos="top" data-theme="a">
+                <ul>
+                    <li>
+                        <a href="#pagehome" data-role="button" data-inline="true" data-icon="grid">Buy</a>
+                    </li>
+                    <li>
+                        <a href="#sellpage" data-rel="popup" data-icon="star" id="openPopup">Sell</a>
+                    </li>
+                    <li>
+                        <a href="#createMultiSig" data-icon="gear" id="settings">Create MultiSig</a>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- /navbar -->
+        </footer>
+    </div>
+
+<script>
+$(function() {
+    
+var key = bitcoin.ECKey.makeRandom();
+var NewPrivKey = key.toWIF();
+var BitcoinAddress = key.pub.getAddress().toString();
+
+var multisigobj = CreateMultiSig(BitcoinAddress);
+var MultiSigAddress = multisigobj.address;
+var ToFundMultiSigUrl = "bitcoin:"+MultiSigAddress+"?amount=0.02";
+
+
+
+    $("#multiSigAddress").html(MultiSigAddress);
+
+    jQuery('#qrCodeMultiSig').qrcode({
+        render  : "table",
+        text    : ToFundMultiSigUrl
+    }); 
+
+
+});
+
+function CallBitcoinWallet() {
+    var bitcoinAddress = $("#multiSigAddress").html();
+    var bitcoinURL = "bitcoin:" + bitcoinAddress; // + "?amount=0.02"
+    console.log(bitcoinURL);
+
+
+    window.plugins.webintent.startActivity({
+    action: window.plugins.webintent.ACTION_VIEW,
+    url: bitcoinURL},
+    function() {},
+    function() {alert('Failed to open URL via Android Intent')});
+}
+
+</script>
+
+
+
+        
+    </body>
+</html>

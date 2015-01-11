@@ -2,71 +2,171 @@
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <script>
-        var QuantityStr = '';
+        var SellPinStr = '';
+        var CancelPinStr = '';
     </script>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             <asp:Panel ID="pnlStep1" runat="server" Width="100%">
                 <div class="centered">
                     <asp:LinkButton ID="cmdSell" runat="server" CssClass="button bigButton" OnClick="cmdSell_Click">Sell Bitcoin</asp:LinkButton>
-                    <br /><br /><br /><br />
+                    <br /><br />
                     <asp:LinkButton ID="cmdBuy" runat="server" CssClass="button bigButton">Buy Bitcoin</asp:LinkButton>
-                    <br /><br /><br /><br />
-                    <asp:LinkButton ID="cmdCashout" runat="server" CssClass="button bigButton">Get Your Cash</asp:LinkButton>
-                    <br /><br /><br /><br />
-                    <asp:LinkButton ID="cmdCancelTransaction" runat="server" CssClass="button bigButton">Cancel Transaction</asp:LinkButton>
-                    <br /><br /><br /><br />
+                    <br /><br />
+                    <asp:LinkButton ID="cmdCashout" runat="server" CssClass="button bigButton" OnClick="cmdCashout_Click">Get Your Cash</asp:LinkButton>
+                    <br /><br />
+                    <asp:LinkButton ID="cmdCancelTransaction" runat="server" CssClass="button bigButton" OnClick="cmdCancelTransaction_Click">Return Cash</asp:LinkButton>
+                    <br /><br />
                 </div>
             </asp:Panel>
 
             <asp:Panel ID="pnlSell_Step1" runat="server" Visible="false">
-                <div>
-                    <h3><asp:Label ID="lblSellHowMany" runat="server" Text=""></asp:Label></h3>
-                    <br />
-                    <asp:Label ID="lblSellBtcCurrencyMark" runat="server" Text=""></asp:Label>
-                    <asp:TextBox ID="txtSellQuantity" runat="server" CssClass="quantityText"></asp:TextBox>
-                    <br /><br />
-                    <a href="#" class="button singleButton">7</a>
-                    
-                    <a href="#" class="button singleButton">8</a>
-                    <a href="#" class="button singleButton">9</a>
-                    <br />
-                    <a href="#" class="button singleButton">4</a>
-                    <a href="#" class="button singleButton">5</a>
-                    <a href="#" class="button singleButton">6</a>
-                    <br />
-                    <a href="#" class="button singleButton">1</a>
-                    <a href="#" class="button singleButton">2</a>
-                    <a href="#" class="button singleButton">3</a>
-                    <br />
-                    <a href="#" class="button singleButtonDel">&lt;</a>
-                    <a href="#" class="button singleButton">0</a>
-                    <a href="#" class="button singleButton">.</a>
-                    <br /><br />
-                    <asp:Button ID="cmdSetBtcSellQuantity" runat="server" Text="Next" CssClass="button" OnClick="cmdSetBtcSellQuantity_Click" />
+                <div class="centered">
+                    <asp:LinkButton ID="cmdHaveApp" runat="server" CssClass="button bigButton" OnClick="cmdHaveApp_Click">Have ABE App</asp:LinkButton>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:LinkButton ID="cmdNeedApp" runat="server" CssClass="button bigButton" OnClick="cmdNeedApp_Click">Need ABE App</asp:LinkButton>
                 </div>
             </asp:Panel>
             
-            <asp:Panel ID="pnlSell_Step2" runat="server" Visible="false">
-
+            <asp:Panel ID="pnlNeedApp" runat="server" Visible="false">
+                <div class="centered">
+                    <h5>Use this code to download ABE</h5><br />
+                    <br />
+                    <img src="Images/AppQRCode.png" />
+                    <br /><br />
+                    <a href="Default.aspx" class="button bigButton">Finished</a>
+                </div>
             </asp:Panel>
+            
+            <asp:Panel ID="pnlHaveApp" runat="server" Visible="false">
+                <div class="centered">
+                    <h5>Open ABE Mobile to Complete Your Transactoin</h5>
+                    <br /><br />
+                    <h4>ABE Location ID: 2364</h4>
+                    <br /><br />
+                    <a href="Default.aspx" class="button bigButton">Finished</a>
+                </div>
+            </asp:Panel>
+            
+            <asp:Panel ID="pnlGetYourCash" runat="server" Visible="false">
+                <div class="centered">
+                    <h3>Please Enter Your Seller's PIN</h3>
+                    <br />
+                    <asp:TextBox ID="txtCashoutPIN" runat="server" MaxLength="6" CssClass="quantityText"></asp:TextBox>
+                    <br /><br />
+                    <a href="#" class="button singleButton cashPin">7</a>
+                    <a href="#" class="button singleButton cashPin">8</a>
+                    <a href="#" class="button singleButton cashPin">9</a>
+                    <br />
+                    <a href="#" class="button singleButton cashPin">4</a>
+                    <a href="#" class="button singleButton cashPin">5</a>
+                    <a href="#" class="button singleButton cashPin">6</a>
+                    <br />
+                    <a href="#" class="button singleButton cashPin">1</a>
+                    <a href="#" class="button singleButton cashPin">2</a>
+                    <a href="#" class="button singleButton cashPin">3</a>
+                    <br />
+                    <a href="#" class="button singleButton cashPinDel">&lt;</a>
+                    <a href="#" class="button singleButton cashPin">0</a>
+                    <a href="#" class="button singleButton cashPin">.</a>
+                    <br /><br />
+                    <asp:Button ID="cmdPinFinished" runat="server" Text="Finished" CssClass="button" OnClick="cmdPinFinished_Click" />
+                    <br />
+                    <asp:Label ID="lblPinMsg" runat="server" Text="" Font-Bold="true" ForeColor="Red"></asp:Label>
+                </div>
+            </asp:Panel>
+
+            <asp:Panel ID="pnlCancelTransaction" runat="server" Visible="false">
+                <div class="centered">
+                    <h3>Please Enter Your PIN</h3>
+                    <br />
+                    <asp:TextBox ID="txtCancelPin" runat="server" MaxLength="6" CssClass="quantityText"></asp:TextBox>
+                    <br /><br />
+                    <a href="#" class="button singleButton cancelPin">7</a>
+                    <a href="#" class="button singleButton cancelPin">8</a>
+                    <a href="#" class="button singleButton cancelPin">9</a>
+                    <br />
+                    <a href="#" class="button singleButton cancelPin">4</a>
+                    <a href="#" class="button singleButton cancelPin">5</a>
+                    <a href="#" class="button singleButton cancelPin">6</a>
+                    <br />
+                    <a href="#" class="button singleButton cancelPin">1</a>
+                    <a href="#" class="button singleButton cancelPin">2</a>
+                    <a href="#" class="button singleButton cancelPin">3</a>
+                    <br />
+                    <a href="#" class="button singleButton cancelPinDel">&lt;</a>
+                    <a href="#" class="button singleButton cancelPin">0</a>
+                    <a href="#" class="button singleButton cancelPin">.</a>
+                    <br /><br />
+                    <asp:Button ID="cmdCancelFinished" runat="server" Text="Cancel Transaction" CssClass="button" OnClick="cmdCancelFinished_Click" />
+                    <br />
+                    <asp:Label ID="lblCancelMsg" runat="server" Text="" Font-Bold="true" ForeColor="Red"></asp:Label>
+                </div>
+            </asp:Panel>
+            
+            <asp:Panel ID="pnlPinFinished" runat="server" Visible="false">
+                <div class="centered">
+                    <h2>Thank you for using ABE</h2>
+                    <br /><br />
+                    <img src="Images/chevy-chase-atm-o.gif" />
+                    <br />
+                </div>
+            </asp:Panel>
+             
+            <asp:Panel ID="pnlCancelFinished" runat="server" Visible="false">
+                <div class="centered">
+                    <h2>Thank you for using ABE</h2>
+                    <br /><br />
+                    <h3>Your Transaction Has Been Cancelled</h3>
+                    <br /><br />
+                    <img src="Images/chevy-chase-atm-o.gif" />
+                    <br />
+                </div>
+            </asp:Panel>
+
+            <asp:Panel ID="pnlBuyStep1" runat="server" Visible="false">
+                <div class="centered">
+                    <h3>How Many Bitcoins Do You Want to Buy?</h3>
+                    <br />
+                    <h5>1 BTC = $277.92  |  0.1 BTC = $27.80  | 0.001 BTC = $2.80</h5>
+                    <br /><br />
+                    <asp:LinkButton ID="LinkButton1" runat="server" CssClass="button bigButton" OnClick="cmdHaveApp_Click">Have ABE App</asp:LinkButton>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:LinkButton ID="LinkButton2" runat="server" CssClass="button bigButton" OnClick="cmdNeedApp_Click">Need ABE App</asp:LinkButton>
+                </div>
+            </asp:Panel>
+            
         </ContentTemplate>
     </asp:UpdatePanel>
 
     <script>
         $(function ()
         {
-            $(document).on("click", ".singleButton", function ()
+            $(document).on("click", ".cashPin", function ()
             {
-                QuantityStr += $(this).html();
-                $('#MainContent_txtSellQuantity').val(QuantityStr);
+                SellPinStr += $(this).html();
+                $('#MainContent_txtCashoutPIN').val(SellPinStr);
             });
         });
 
         $(function () {
-            $(document).on("click", ".singleButtonDel", function () {
-                QuantityStr = QuantityStr.substr(0, QuantityStr.length - 1);
-                $('#MainContent_txtSellQuantity').val(QuantityStr);
+            $(document).on("click", ".cashPinDel", function () {
+                SellPinStr = SellPinStr.substr(0, SellPinStr.length - 1);
+                $('#MainContent_txtCashoutPIN').val(SellPinStr);
+            });
+        });
+
+        $(function () {
+            $(document).on("click", ".cancelPin", function () {
+                CancelPinStr += $(this).html();
+                $('#MainContent_txtCancelPin').val(CancelPinStr);
+            });
+        });
+
+        $(function () {
+            $(document).on("click", ".cancelPinDel", function () {
+                CancelPinStr = CancelPinStr.substr(0, CancelPinStr.length - 1);
+                $('#MainContent_txtCancelPin').val(CancelPinStr);
             });
         });
     </script>

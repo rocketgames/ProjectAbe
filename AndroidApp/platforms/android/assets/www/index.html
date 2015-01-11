@@ -27,6 +27,7 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
 
     <script type="text/javascript" src="bitcoinjs.min.js"></script>
     <script type="text/javascript" src="branching.js"></script>
@@ -36,17 +37,20 @@
 
 
     <body>
-        
-    <div data-role="page" id="pagehome">
+       
+
+
+ <div data-role="page" id="pagehome">
+
         <div data-role="header" data-theme="a">
             <!-- <a href="index.html" data-icon="grid" rel="external">Menu</a> -->
             <h1>ABE - MultiSig ATM</h1>
         </div>
         <div data-role="content" style="width:100%; height:100%; padding:0;">
 
-            This is your MultiSig key <span id="multiSigAddress"></span>
-            <div id="qrCodeMultiSig" style="margin: 20px;"></div><BR>
-            <center><button onclick="CallBitcoinWallet()">Click to Fund</button></center>
+            Using the ABE you can BUY or SELL bitcoins. 
+            <center><button onclick="window.location='#buypage';">Buy Bitcoins</button>
+                &nbsp; <button onclick="window.location='#sellpage';">Sell Bitcoins</button></center>
         </div>
 
 
@@ -54,15 +58,216 @@
             <div data-role="navbar" data-iconpos="top" data-theme="a">
                 <ul>
                     <li>
-                        <a href="#pagehome" data-role="button" data-inline="true" data-icon="grid">Buy</a>
+                        <a href="#buypage"  onclick="window.location='#buypage';return false;" data-role="button" data-inline="true" data-icon="grid">Buy</a>
                     </li>
                     <li>
-                        <a href="#sellpage" data-rel="popup" data-icon="star" id="openPopup">Sell</a>
+                        <a href="#sellpage" onclick="window.location='#sellpage';return false;"  data-rel="popup" data-icon="star" id="openPopup">Sell</a>
                     </li>
                     <li>
-                        <a href="#createMultiSig" data-icon="gear" id="settings">Create MultiSig</a>
+                        <a href="#transactions" data-icon="gear" id="settings">Transactions</a>
                     </li>
+                </ul>
+            </div>
+        </footer>
+    </div>
 
+<style>
+#bodyContent P{
+    font-size:24px;
+}
+
+.content {
+    font-size:24px;
+}
+</style>
+ <div data-role="page" id="buypage">
+
+        <div data-role="header" data-theme="a">
+            <!-- <a href="index.html" data-icon="grid" rel="external">Menu</a> -->
+            <h1>ABE - MultiSig ATM</h1>
+        </div>
+        <div data-role="content" style="width:100%; height:100%; padding:0;">
+           <div id="map_canvas" style="width:100%;height:100%"></div>
+        </div>
+
+<script>
+var map;
+
+function max_height() {
+    var header = $.mobile.activePage.find("div[data-role='header']:visible");
+    var footer = $.mobile.activePage.find("div[data-role='footer']:visible");
+    var content = $.mobile.activePage.find("div[data-role='content']:visible:visible");
+    var viewport_height = $(window).height();
+
+    var content_height = viewport_height - header.outerHeight() - footer.outerHeight();
+    if ((content.outerHeight() - header.outerHeight() - footer.outerHeight()) <= viewport_height) {
+        content_height -= (content.outerHeight() - content.height());
+    }
+    $.mobile.activePage.find('[data-role="content"]').height(content_height);
+}
+
+
+$(document).on('pageshow', '#buypage', function (event) {
+    max_height();
+    navigator.geolocation.getCurrentPosition(onSuccess, onError, { 'enableHighAccuracy': true, 'timeout': 20000 });
+});
+
+function onSuccess(position) {
+    var minZoomLevel = 15;
+
+    map = new google.maps.Map(document.getElementById('map_canvas'), {
+        zoom: minZoomLevel,
+        center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+
+    var myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        draggable: true,
+        raiseOnDrag: true,
+        title: 'My Shout'
+    });
+
+    
+        var contentString = '<div id="content">' +
+            '<h1 id="firstHeading" class="firstHeading">Location ID: 2364</h1>' +
+            '<div id="bodyContent">' +
+            '<p>At the Lab Miami</p></div></div>';
+
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+
+    google.maps.event.addListener(marker, 'click', function () {
+        infowindow.open(map, marker);
+    });
+
+
+}
+
+function onError() {
+    console.log("fail", arguments);
+}
+
+</script>
+
+
+        <footer data-role="footer" data-position="fixed" data-theme="a" id="app-nav">
+            <div data-role="navbar" data-iconpos="top" data-theme="a">
+                <ul>
+                    <li>
+                        <a href="#buypage"  onclick="window.location='#buypage';return false;" data-role="button" data-inline="true" data-icon="grid">Buy</a>
+                    </li>
+                    <li>
+                        <a href="#sellpage" onclick="window.location='#sellpage';return false;"  data-rel="popup" data-icon="star" id="openPopup">Sell</a>
+                    </li>
+                    <li>
+                        <a href="#transactions" data-icon="gear" id="settings">Transactions</a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+
+    <div data-role="page" id="sellpage">
+
+        <div data-role="header" data-theme="a">
+            <!-- <a href="index.html" data-icon="grid" rel="external">Menu</a> -->
+            <h1>ABE - MultiSig ATM</h1>
+        </div>
+        <div data-role="content" style="width:100%; height:100%; padding:0;" class="content">
+
+            <center>How many Bitcoins are you selling?<BR>
+            <input type=text id="sellBitcoinAmount" value="0.01">
+            <button onclick="window.location='#sellpage2';">Next</button></center>
+        </div>
+
+
+        <footer data-role="footer" data-position="fixed" data-theme="a" id="app-nav">
+            <div data-role="navbar" data-iconpos="top" data-theme="a">
+                <ul>
+                    <li>
+                        <a href="#buypage"  onclick="window.location='#buypage';return false;" data-role="button" data-inline="true" data-icon="grid">Buy</a>
+                    </li>
+                    <li>
+                        <a href="#sellpage" onclick="window.location='#sellpage';return false;"  data-rel="popup" data-icon="star" id="openPopup">Sell</a>
+                    </li>
+                    <li>
+                        <a href="#transactions" data-icon="gear" id="settings">Transactions</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /navbar -->
+        </footer>
+    </div>
+
+        <div data-role="page" id="sellpage2">
+
+        <div data-role="header" data-theme="a">
+            <!-- <a href="index.html" data-icon="grid" rel="external">Menu</a> -->
+            <h1>ABE - MultiSig ATM</h1>
+        </div>
+        <div data-role="content" style="width:100%; height:100%; padding:0;" class="content">
+
+            <center>Bitcoins are currently going for $<span id="bitcoinPrice">277.92</span><BR>
+                How Much PER BITCOIN would you like to sell it for?<BR>
+            <input type=text id="sellBitcoinPrice" value="277.92">
+            <button onclick="StartBitcoinMutiSig()">Next</button></center>
+        </div>
+
+
+
+
+        <footer data-role="footer" data-position="fixed" data-theme="a" id="app-nav">
+            <div data-role="navbar" data-iconpos="top" data-theme="a">
+                <ul>
+                    <li>
+                        <a href="#buypage"  onclick="window.location='#buypage';return false;" data-role="button" data-inline="true" data-icon="grid">Buy</a>
+                    </li>
+                    <li>
+                        <a href="#sellpage" onclick="window.location='#sellpage';return false;"  data-rel="popup" data-icon="star" id="openPopup">Sell</a>
+                    </li>
+                    <li>
+                        <a href="#transactions" data-icon="gear" id="settings">Transactions</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /navbar -->
+        </footer>
+    </div>
+
+    <div data-role="page" id="sellpage3">
+
+        <div data-role="header" data-theme="a">
+            <!-- <a href="index.html" data-icon="grid" rel="external">Menu</a> -->
+            <h1>ABE - MultiSig ATM</h1>
+        </div>
+        <div data-role="content" style="width:100%; height:100%; padding:0;" class="content">
+            <center>
+            This is your MultiSig key <span id="multiSigAddress"></span>
+            <div id="qrCodeMultiSig" style="margin: 20px;"></div><BR>
+         
+                Your Seller's PIN is <span id="sellerspin">314159</span> at Location ID: <span id="sellerpage3LocationID">2364</span><BR>
+                Now it's time you FUND the MultiSig ID to finish your transaction.
+            <button onclick="CallBitcoinWallet()">Click to Fund</button></center>
+        </div>
+
+
+        <footer data-role="footer" data-position="fixed" data-theme="a" id="app-nav">
+            <div data-role="navbar" data-iconpos="top" data-theme="a">
+                <ul>
+                    <li>
+                        <a href="#buypage"  onclick="window.location='#buypage';return false;" data-role="button" data-inline="true" data-icon="grid">Buy</a>
+                    </li>
+                    <li>
+                        <a href="#sellpage" onclick="window.location='#sellpage';return false;"  data-rel="popup" data-icon="star" id="openPopup">Sell</a>
+                    </li>
+                    <li>
+                        <a href="#transactions" data-icon="gear" id="settings">Transactions</a>
+                    </li>
                 </ul>
             </div>
             <!-- /navbar -->
@@ -70,15 +275,23 @@
     </div>
 
 <script>
-$(function() {
-    
+function StartBitcoinMutiSig() {
+        window.location='#sellpage3';
+        var AskingBitcoinPrice = $("#sellBitcoinPrice").val();
+        var AskingBitcoinAmount = $("#sellBitcoinAmount").val();
+        console.log(AskingBitcoinPrice);
+        console.log(AskingBitcoinAmount);
+
+        // Communicate to server price and amount and get PIN
+
+            
 var key = bitcoin.ECKey.makeRandom();
 var NewPrivKey = key.toWIF();
 var BitcoinAddress = key.pub.getAddress().toString();
 
 var multisigobj = CreateMultiSig(BitcoinAddress);
 var MultiSigAddress = multisigobj.address;
-var ToFundMultiSigUrl = "bitcoin:"+MultiSigAddress+"?amount=0.02";
+var ToFundMultiSigUrl = "bitcoin:"+MultiSigAddress+"?amount="+AskingBitcoinAmount;
 
 
 
@@ -90,12 +303,14 @@ var ToFundMultiSigUrl = "bitcoin:"+MultiSigAddress+"?amount=0.02";
     }); 
 
 
-});
+}
 
 function CallBitcoinWallet() {
     var bitcoinAddress = $("#multiSigAddress").html();
-    var bitcoinURL = "bitcoin:" + bitcoinAddress; // + "?amount=0.02"
+    var bitcoinURL = "bitcoin:" + bitcoinAddress + "?amount=0.02"
     console.log(bitcoinURL);
+
+    // Communicate with server that the transaction is about to happen.
 
 
     window.plugins.webintent.startActivity({

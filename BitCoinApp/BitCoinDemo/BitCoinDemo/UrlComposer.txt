@@ -1,0 +1,29 @@
+Install-Package Microsoft.AspNet.WebApi -Version 5.2.2
+
+http://localhost:52491/api/apidemo/GetAuthenticationKey?url=https://api.coinkite.com/v1/my/self&key=K36e69e8c-114ce276-e3148282a78f3da5&currenttime=2
+
+
+
+Damian's bitcoin info at coinKite
+key: K36e69e8c-114ce276-e3148282a78f3da5
+
+secret: Sfe7cd945-3f8b804d-8bdf3843467e1a4a
+
+
+
+https://api.coinkite.com/v1/my/self
+
+Machine name: ACNU430960D
+
+
+
+{"TargetURL":    "https://api.coinkite.com/v1/my/accounts",
+"SecretKey":     "K36e69e8c-114ce276-e3148282a78f3da5",
+"EncrytpedKey":   "e0400e93885630832cd3620d3fab36457ebdbee193b73f39ca71e1f770e39135",
+"Timestamp":      "1/11/2015 3:38:39 AM"}
+
+
+{"TargetURL":"https://api.coinkite.com/v1/my/accounts",
+"SecretKey":"K36e69e8c-114ce276-e3148282a78f3da5",
+"EncrytpedKey":  "dbff6167b29a0a035e043790144b32ae1484a003246c3bf6aa1d0bf28598b05e",
+"Timestamp":"1/11/2015 4:53:21 AM"}

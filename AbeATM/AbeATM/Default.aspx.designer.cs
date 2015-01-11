@@ -76,48 +76,156 @@ namespace AbeATM {
         protected global::System.Web.UI.WebControls.Panel pnlSell_Step1;
         
         /// <summary>
-        /// lblSellHowMany control.
+        /// cmdHaveApp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSellHowMany;
+        protected global::System.Web.UI.WebControls.LinkButton cmdHaveApp;
         
         /// <summary>
-        /// lblSellBtcCurrencyMark control.
+        /// cmdNeedApp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSellBtcCurrencyMark;
+        protected global::System.Web.UI.WebControls.LinkButton cmdNeedApp;
         
         /// <summary>
-        /// txtSellQuantity control.
+        /// pnlNeedApp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSellQuantity;
+        protected global::System.Web.UI.WebControls.Panel pnlNeedApp;
         
         /// <summary>
-        /// cmdSetBtcSellQuantity control.
+        /// pnlHaveApp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button cmdSetBtcSellQuantity;
+        protected global::System.Web.UI.WebControls.Panel pnlHaveApp;
         
         /// <summary>
-        /// pnlSell_Step2 control.
+        /// pnlGetYourCash control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlSell_Step2;
+        protected global::System.Web.UI.WebControls.Panel pnlGetYourCash;
+        
+        /// <summary>
+        /// txtCashoutPIN control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCashoutPIN;
+        
+        /// <summary>
+        /// cmdPinFinished control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button cmdPinFinished;
+        
+        /// <summary>
+        /// lblPinMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPinMsg;
+        
+        /// <summary>
+        /// pnlCancelTransaction control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlCancelTransaction;
+        
+        /// <summary>
+        /// txtCancelPin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCancelPin;
+        
+        /// <summary>
+        /// cmdCancelFinished control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button cmdCancelFinished;
+        
+        /// <summary>
+        /// lblCancelMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCancelMsg;
+        
+        /// <summary>
+        /// pnlPinFinished control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPinFinished;
+        
+        /// <summary>
+        /// pnlCancelFinished control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlCancelFinished;
+        
+        /// <summary>
+        /// pnlBuyStep1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlBuyStep1;
+        
+        /// <summary>
+        /// LinkButton1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        
+        /// <summary>
+        /// LinkButton2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
     }
 }

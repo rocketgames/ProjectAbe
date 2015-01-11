@@ -44,7 +44,7 @@
                 </p>
             </div>
             <div class="float-right">
-                <asp:Label ID="lblExchange" runat="server" Text="1 BTC = $290  |  $1 = 0.003448 BTC"></asp:Label>
+                <asp:Label ID="lblExchange" runat="server" Text="1 BTC = $277.92  |  $1 = 0.003448 BTC"></asp:Label>
             </div>
         </div>
     </header>

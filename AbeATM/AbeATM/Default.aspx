@@ -4,6 +4,7 @@
     <script>
         var SellPinStr = '';
         var CancelPinStr = '';
+        var BuyQuanityStr = '';
     </script>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
@@ -11,7 +12,7 @@
                 <div class="centered">
                     <asp:LinkButton ID="cmdSell" runat="server" CssClass="button bigButton" OnClick="cmdSell_Click">Sell Bitcoin</asp:LinkButton>
                     <br /><br />
-                    <asp:LinkButton ID="cmdBuy" runat="server" CssClass="button bigButton">Buy Bitcoin</asp:LinkButton>
+                    <asp:LinkButton ID="cmdBuy" runat="server" CssClass="button bigButton" OnClick="cmdBuy_Click">Buy Bitcoin</asp:LinkButton>
                     <br /><br />
                     <asp:LinkButton ID="cmdCashout" runat="server" CssClass="button bigButton" OnClick="cmdCashout_Click">Get Your Cash</asp:LinkButton>
                     <br /><br />
@@ -40,7 +41,7 @@
             
             <asp:Panel ID="pnlHaveApp" runat="server" Visible="false">
                 <div class="centered">
-                    <h5>Open ABE Mobile to Complete Your Transactoin</h5>
+                    <h5>Open ABE Mobile to Complete Your Transaction</h5>
                     <br /><br />
                     <h4>ABE Location ID: 2364</h4>
                     <br /><br />
@@ -53,7 +54,7 @@
                     <h3>Please Enter Your Seller's PIN</h3>
                     <br />
                     <asp:TextBox ID="txtCashoutPIN" runat="server" MaxLength="6" CssClass="quantityText"></asp:TextBox>
-                    <br /><br />
+                    <br />
                     <a href="#" class="button singleButton cashPin">7</a>
                     <a href="#" class="button singleButton cashPin">8</a>
                     <a href="#" class="button singleButton cashPin">9</a>
@@ -127,15 +128,56 @@
             <asp:Panel ID="pnlBuyStep1" runat="server" Visible="false">
                 <div class="centered">
                     <h3>How Many Bitcoins Do You Want to Buy?</h3>
+                    <h5><asp:Label ID="lblRates" runat="server" Text=""></asp:Label></h5>
+                    <asp:TextBox ID="txtBuyQuantity" runat="server" CssClass="quantityText"></asp:TextBox>
                     <br />
-                    <h5>1 BTC = $277.92  |  0.1 BTC = $27.80  | 0.001 BTC = $2.80</h5>
-                    <br /><br />
-                    <asp:LinkButton ID="LinkButton1" runat="server" CssClass="button bigButton" OnClick="cmdHaveApp_Click">Have ABE App</asp:LinkButton>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:LinkButton ID="LinkButton2" runat="server" CssClass="button bigButton" OnClick="cmdNeedApp_Click">Need ABE App</asp:LinkButton>
+                    <a href="#" class="button singleButton buyQuantity">7</a>
+                    <a href="#" class="button singleButton buyQuantity">8</a>
+                    <a href="#" class="button singleButton buyQuantity">9</a>
+                    <br />
+                    <a href="#" class="button singleButton buyQuantity">4</a>
+                    <a href="#" class="button singleButton buyQuantity">5</a>
+                    <a href="#" class="button singleButton buyQuantity">6</a>
+                    <br />
+                    <a href="#" class="button singleButton buyQuantity">1</a>
+                    <a href="#" class="button singleButton buyQuantity">2</a>
+                    <a href="#" class="button singleButton buyQuantity">3</a>
+                    <br />
+                    <a href="#" class="button singleButton buyQuantityDel">&lt;</a>
+                    <a href="#" class="button singleButton buyQuantity">0</a>
+                    <a href="#" class="button singleButton buyQuantity">.</a>
+                    <br />
+                    <asp:Button ID="cmdBuyNext" runat="server" Text="Next" CssClass="button" OnClick="cmdBuyNext_Click" />
                 </div>
             </asp:Panel>
             
+            <asp:Panel ID="pnlBuyInsertCash" runat="server" Visible="false">
+                <div class="centered">
+                    <h2>Please Insert <asp:Label ID="lblDollarAmount" runat="server" Text=""></asp:Label></h2>
+                    <br /><br />
+                    <img src="Images/show_me_money.gif" />
+                    <br /><br />
+                    <asp:Button ID="cmdBuyFinished" runat="server" CssClass="button" Text="Finished" OnClick="cmdBuyFinished_Click" />
+                </div>
+            </asp:Panel>
+
+            <asp:Panel ID="pnlBuyFinished" runat="server" Visible="false">
+                <div class="centered">
+                    <h2>Scan With Your Camera to Deposit to Your Wallet</h2>
+                    <br /><br />
+                    <asp:ImageButton ID="cmdQR" runat="server" ImageUrl="~/Images/QRCodeCamera.png" OnClick="cmdQR_Click" />
+                    <br /><br />
+                </div>
+            </asp:Panel>
+
+            <asp:Panel ID="pnlFundingFinished" runat="server" Visible="false">
+                <div class="centered">
+                    <h2>Thank you.</h2>
+                    <br />
+                    <h2>Your wallet will be funded momentarily</h2>
+                </div>
+            </asp:Panel>
+
         </ContentTemplate>
     </asp:UpdatePanel>
 
@@ -167,6 +209,20 @@
             $(document).on("click", ".cancelPinDel", function () {
                 CancelPinStr = CancelPinStr.substr(0, CancelPinStr.length - 1);
                 $('#MainContent_txtCancelPin').val(CancelPinStr);
+            });
+        });
+
+        $(function () {
+            $(document).on("click", ".buyQuantity", function () {
+                BuyQuanityStr += $(this).html();
+                $('#MainContent_txtBuyQuantity').val(BuyQuanityStr);
+            });
+        });
+
+        $(function () {
+            $(document).on("click", ".buyQuantityDel", function () {
+                BuyQuanityStr = BuyQuanityStr.substr(0, BuyQuanityStr.length - 1);
+                $('#MainContent_txtBuyQuantity').val(BuyQuanityStr);
             });
         });
     </script>

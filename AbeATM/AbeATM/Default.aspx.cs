@@ -11,7 +11,6 @@ namespace AbeATM
     {
         #region Variables
 
-        // TODO: get this exchange rate from the server
         private float OneBtcRate = 277.92f;
 
         private const string Str_SellerPin = "314159";
@@ -47,6 +46,10 @@ namespace AbeATM
             this.pnlPinFinished.Visible = false;
             this.pnlCancelTransaction.Visible = false;
             this.pnlCancelFinished.Visible = false;
+            this.pnlBuyStep1.Visible = false;
+            this.pnlBuyInsertCash.Visible = false;
+            this.pnlBuyFinished.Visible = false;
+            this.pnlFundingFinished.Visible = false;
         }
 
         // HidePanels
@@ -146,6 +149,57 @@ namespace AbeATM
         }
 
         // cmdCancelFinished_Click
+        #endregion
+
+        #region cmdBuyNext_Click
+
+        protected void cmdBuyNext_Click(object sender, EventArgs e)
+        {
+            // validate we have a valid value
+            if (string.IsNullOrEmpty(this.txtBuyQuantity.Text))
+                return;
+
+            float BuyQuantity = 0;
+            if (!float.TryParse(this.txtBuyQuantity.Text, out BuyQuantity))
+                return;
+
+            // move to the insert cash panel
+            HidePanels();
+            this.pnlBuyInsertCash.Visible = true;
+            this.lblDollarAmount.Text = (BuyQuantity * OneBtcRate).ToString("C");
+        }
+
+        // cmdBuyNext_Click
+        #endregion
+
+        #region cmdBuy_Click
+
+        protected void cmdBuy_Click(object sender, EventArgs e)
+        {
+            HidePanels();
+            this.pnlBuyStep1.Visible = true;
+            this.lblRates.Text = string.Format("1 BTC = {0}  |  0.1 BTC = {1} | 0.001 BTC = {2}",
+                OneBtcRate.ToString("C"),
+                (OneBtcRate * 0.1f).ToString("C"),
+                (OneBtcRate * 0.001f).ToString("C"));
+        }
+        #endregion
+
+        #region cmdBuyFinished
+
+        protected void cmdBuyFinished_Click(object sender, EventArgs e)
+        {
+            HidePanels();
+            this.pnlBuyFinished.Visible = true;
+        }
+
+        protected void cmdQR_Click(object sender, ImageClickEventArgs e)
+        {
+            HidePanels();
+            this.pnlFundingFinished.Visible = true;
+        }
+
+        // cmdBuyFinished
         #endregion
     }
 }

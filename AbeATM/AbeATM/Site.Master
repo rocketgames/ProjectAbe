@@ -38,18 +38,14 @@
     </asp:ScriptManager>
     <header>
         <div class="content-wrapper">
-            <div class="float-left">
-                <p class="site-title">
-                    <strong><a href="Default.aspx" class="Abe">ABE</a></strong>&nbsp;Bitcoin. Cash. Finished.
-                </p>
-            </div>
-            <div class="float-right">
-                <asp:Label ID="lblExchange" runat="server" Text="1 BTC = $277.92  |  $1 = 0.003448 BTC"></asp:Label>
-            </div>
+            <p class="site-title">
+                <strong><a href="Default.aspx" class="Abe">ABE</a></strong>&nbsp;Bitcoin. Cash. Finished.
+            </p>
+            1 BTC = $277.92  |  $1 = 0.003448 BTC<br />
+            Location ID: 2364
         </div>
     </header>
     <div id="body">
-        <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
         <section class="content-wrapper main-content clear-fix">
             <asp:ContentPlaceHolder runat="server" ID="MainContent" />
         </section>

@@ -4,3 +4,6 @@ C:\SVN\Bitcoin Hackathon\Test Console Project\TestLocalbitcoin\TestLocalbitcoin\
 C:\SVN\Bitcoin Hackathon\Test Console Project\TestLocalbitcoin\TestLocalbitcoin\obj\Debug\TestLocalbitcoin.csprojResolveAssemblyReference.cache
 C:\SVN\Bitcoin Hackathon\Test Console Project\TestLocalbitcoin\TestLocalbitcoin\obj\Debug\TestLocalbitcoin.exe
 C:\SVN\Bitcoin Hackathon\Test Console Project\TestLocalbitcoin\TestLocalbitcoin\obj\Debug\TestLocalbitcoin.pdb
+C:\Projects\BitcoinHackathon\Localbitcoin API\TestLocalbitcoin\TestLocalbitcoin\bin\Debug\TestLocalbitcoin.exe.config
+C:\Projects\BitcoinHackathon\Localbitcoin API\TestLocalbitcoin\TestLocalbitcoin\obj\Debug\TestLocalbitcoin.exe
+C:\Projects\BitcoinHackathon\Localbitcoin API\TestLocalbitcoin\TestLocalbitcoin\obj\Debug\TestLocalbitcoin.pdb

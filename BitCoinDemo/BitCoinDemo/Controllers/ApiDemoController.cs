@@ -37,6 +37,7 @@ namespace BitCoinDemo.Controllers
         public string SecretKey { get; set; }
         public string EncrytpedKey { get; set; }
         public string Timestamp { get; set; }
+        public string HeaderString { get; set; }
 
         public AuthKey(string url, string key, string timestamp){
 
@@ -44,6 +45,8 @@ namespace BitCoinDemo.Controllers
             this.SecretKey = key;
             this.Timestamp = timestamp;
             this.EncrytpedKey = GetEncryptedKey();
+            this.HeaderString = string.Format("X-CK-Key: K36e69e8c-114ce276-e3148282a78f3da5  X-CK-Sign: {0}  X-CK-Timestamp: {1}", this.EncrytpedKey, this.Timestamp);
+
         }
 
       

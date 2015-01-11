@@ -14,6 +14,8 @@
                     <br /><br /><br /><br />
                     <asp:LinkButton ID="cmdCashout" runat="server" CssClass="button bigButton">Get Your Cash</asp:LinkButton>
                     <br /><br /><br /><br />
+                    <asp:LinkButton ID="cmdCancelTransaction" runat="server" CssClass="button bigButton">Cancel Transaction</asp:LinkButton>
+                    <br /><br /><br /><br />
                 </div>
             </asp:Panel>
 
